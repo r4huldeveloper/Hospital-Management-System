@@ -50,5 +50,6 @@ public class Patient {
         psmt.setInt(1,id);
         ResultSet rs = psmt.executeQuery();
         return rs.next();
+
     }
 }
