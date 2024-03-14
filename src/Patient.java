@@ -1,8 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Locale;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Patient {
@@ -14,7 +10,7 @@ public class Patient {
         this.scanner = scanner;
     }
 
-    public void addPatient(){
+    public void addPatient() throws SQLException{
         System.out.print("Enter patient name: ");
         String name = scanner.next();
         System.out.print("Enter patient age: ");
@@ -22,7 +18,6 @@ public class Patient {
         System.out.print("Enter patient gender: ");
         String gender = scanner.next();
 
-        try {
             String query = "INSERT INTO patients(name,age,gender) VALUES(?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,name);
@@ -34,10 +29,6 @@ public class Patient {
             else
                 System.out.println("Operation failed");
         }
-        catch (SQLException e){
-            e.printStackTrace();;
-        }
-    }
 
     public void viewPatients() throws SQLException{
         String query = "SELECT * from patients";
@@ -58,9 +49,6 @@ public class Patient {
         PreparedStatement psmt = connection.prepareStatement(query);
         psmt.setInt(1,id);
         ResultSet rs = psmt.executeQuery();
-        if(rs.next())
-            return true;
-        else
-            return false;
+        return rs.next();
     }
 }

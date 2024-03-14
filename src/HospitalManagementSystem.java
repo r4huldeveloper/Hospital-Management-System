@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class HospitalManagementSystem {
     private static final String URL = "jdbc:mysql://localhost:3306/hospital";
     private static final String USERNAME = "root";
-    private static final String PASSWORD="rahul12345";
+    private static final String PASSWORD = "rahul12345";
 
     public static void main(String[] args) throws SQLException {
         Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -60,7 +60,7 @@ public class HospitalManagementSystem {
         String appointmentDate = scanner.next();
 
         if (patient.getPatientById(patientId) && doctor.getDoctorById(doctorId)) {
-            if (checkDoctorAvailability(doctorId, appointmentDate,connection)){
+            if (checkDoctorAvailability(doctorId, appointmentDate, connection)){
                 String query = "INSERT INTO appointment(patient_id, doctor_id, appointment_date) VALUES(?,?,?)";
                 PreparedStatement ps = connection.prepareStatement(query);
                 ps.setInt(1,patientId);
